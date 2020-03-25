@@ -8,7 +8,7 @@ import (
 )
 
 type entityServer struct {
-	data.UnimplementedEntityAPIServer
+	data.UnimplementedEntityWriteAPIServer
 }
 
 func (e entityServer) Create(_ context.Context, entity *data.Entity) (*data.Entity, error) {
@@ -23,6 +23,6 @@ func (e entityServer) Update(_ context.Context, entity *data.Entity) (*data.Enti
 
 func main() {
 	api := grpc.New()
-	data.RegisterEntityAPIServer(api.Server, &entityServer{})
+	data.RegisterEntityWriteAPIServer(api.Server, &entityServer{})
 	api.Start()
 }
